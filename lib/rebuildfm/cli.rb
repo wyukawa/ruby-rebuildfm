@@ -22,5 +22,10 @@ module Rebuildfm
       system("osascript -e \'tell application \"iTunes\"\' -e 'open location \"#{rss.items[index.to_i].enclosure.url}\" play' -e 'end tell'")
     end
 
+    desc "stop", "stop rebuildfm"
+    def stop()
+      system("osascript -e \'tell application \"iTunes\"\' -e 'stop' -e 'end tell'")
+    end
+
   end
 end
