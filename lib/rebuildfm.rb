@@ -1,4 +1,4 @@
-require "ruby/rebuildfm/version"
+require "rebuildfm/version"
 
 require 'rss'
 
