@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'ruby/rebuildfm/version'
+require 'rebuildfm/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "ruby-rebuildfm"
-  spec.version       = Ruby::Rebuildfm::VERSION
-  spec.authors       = ["TODO: Write your name"]
-  spec.email         = ["TODO: Write your email address"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.name          = "rebuildfm"
+  spec.version       = Rebuildfm::VERSION
+  spec.authors       = ["wyukawa"]
+  spec.email         = ["wyukawa@gmail.com"]
+  spec.summary       = %q{rebuildfm ruby client}
+  spec.description   = %q{rebuildfm ruby client}
   spec.homepage      = ""
   spec.license       = "MIT"
 
