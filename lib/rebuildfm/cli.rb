@@ -16,16 +16,30 @@ module Rebuildfm
       }
     end
     
-    desc "play 0", "play rebuildfm"
+    desc "play [index]", "play rebuildfm"
     def play(index)
+      begin
+        i=Integer(index)
+      rescue
+        raise ArgumentError, "#{index} is not integer"
+      end
       rss = RSS::Parser.parse(URL)
-      system("osascript -e \'tell application \"iTunes\"\' -e 'open location \"#{rss.items[index.to_i].enclosure.url}\" play' -e 'end tell'")
+      if i <= 0 || i > rss.items.length then
+        raise ArgumentError, "#{i} is not in [1 .. #{rss.items.length}]"
+      end
+      system("osascript -e \'tell application \"iTunes\"\' -e 'open location \"#{rss.items[rss.items.length - i].enclosure.url}\" play' -e 'end tell'")
     end
 
     desc "stop", "stop rebuildfm"
     def stop()
       system("osascript -e \'tell application \"iTunes\"\' -e 'stop' -e 'end tell'")
     end
+
+    # comment out because I don't understand how to resume
+    #desc "pause", "pause rebuildfm"
+    #def pause()
+    #  system("osascript -e \'tell application \"iTunes\"\' -e 'pause' -e 'end tell'")
+    #end
 
   end
 end
