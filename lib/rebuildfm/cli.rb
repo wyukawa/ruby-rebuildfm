@@ -11,7 +11,7 @@ module Rebuildfm
     desc "list", "list rebuildfm"
     def list()
       rss = RSS::Parser.parse(URL)
-      rss.items.each{|item|
+      rss.items.reverse.each{|item|
         puts item.title
       }
     end
