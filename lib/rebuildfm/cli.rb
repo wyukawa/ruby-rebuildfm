@@ -1,6 +1,7 @@
 require "rebuildfm"
 require 'thor'
 require 'rss'
+require 'nokogiri'
 
 module Rebuildfm
 
@@ -27,6 +28,18 @@ module Rebuildfm
       if i <= 0 || i > rss.items.length then
         raise ArgumentError, "#{i} is not in [1 .. #{rss.items.length}]"
       end
+      rss = RSS::Parser.parse(URL)
+      html = rss.items[rss.items.length - i].description
+      doc = Nokogiri::HTML.parse(html)
+      body = doc.xpath('/html/body')
+      summary = body.xpath('p')[0].inner_text.strip
+      puts summary
+      puts "\n"
+      puts "Show Notes"
+      puts "\n"
+      body.xpath('ul/li').each{|li|
+        puts "* " + li.xpath('a').inner_text.strip
+      }
       system("osascript -e \'tell application \"iTunes\"\' -e 'open location \"#{rss.items[rss.items.length - i].enclosure.url}\" play' -e 'end tell'")
     end
 
