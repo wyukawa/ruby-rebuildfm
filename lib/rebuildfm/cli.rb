@@ -8,7 +8,7 @@ module Rebuildfm
 
     URL = 'http://feeds.rebuild.fm/rebuildfm'
 
-    desc "list"
+    desc "list", "list rebuildfm"
     def list()
       rss = RSS::Parser.parse(URL)
       rss.items.each{|item|
@@ -16,10 +16,10 @@ module Rebuildfm
       }
     end
     
-    desc "play index"
+    desc "play 0", "play rebuildfm"
     def play(index)
       rss = RSS::Parser.parse(URL)
-      print("osascript -e \'tell application \"iTunes\"\' -e 'open location \"#{rss.items[index].enclosure.url}\" play' -e 'end tell'")
+      system("osascript -e \'tell application \"iTunes\"\' -e 'open location \"#{rss.items[index.to_i].enclosure.url}\" play' -e 'end tell'")
     end
 
   end
